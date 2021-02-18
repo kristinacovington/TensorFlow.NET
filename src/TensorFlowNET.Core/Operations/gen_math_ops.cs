@@ -153,14 +153,14 @@ namespace Tensorflow
                 }
             });
 
-        public static Tensor mean(Tensor[] inputs, Tensor axis, bool keep_dims = false, string name = null)
+        public static Tensor mean(Tensor[] input, Tensor axis, bool keep_dims = false, string name = null)
         {
             if (tf.Context.executing_eagerly())
             {
-                return mean_eager_fallback(inputs, axis, keep_dims: keep_dims, name: name, ctx: tf.Context);
+                return mean_eager_fallback(input, axis, keep_dims: keep_dims, name: name, ctx: tf.Context);
             }
 
-            var _op = tf.OpDefLib._apply_op_helper("Mean", name, args: new { inputs, reduction_indices = axis, keep_dims = keep_dims });
+            var _op = tf.OpDefLib._apply_op_helper("Mean", name, args: new { input, reduction_indices = axis, keep_dims = keep_dims });
 
             return _op.output;
         }
